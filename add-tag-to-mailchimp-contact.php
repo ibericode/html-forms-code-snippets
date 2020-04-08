@@ -5,6 +5,7 @@
 // Then make sure the form has a hidden field named "EMAIL" whose value is "{{hfmuc_email}}",
 // eg `<input type="hidden" name="EMAIL" placeholder="Your email" required value="{{hfmuc_email}}" />`
 // Find your list ID (see https://mailchimp.com/help/find-audience-id/) and put it in $list_id below
+// Find the HTML Forms slug (seen when editing the form) and put it in $form_slug
 // Add any tags you want to $tags_data
 
 // Now the user will get a link to the form, fill it out (no need to re-enter their email)
@@ -25,6 +26,12 @@ add_filter(
 add_action(
     'hf_form_success',
     function ($submission, $form) {
+        // Check that it's the right form.
+        $form_slug = 'survey-1';
+        if($form->slug !== $form_slug){
+            return;
+        }
+
         $email_address = $submission->data['EMAIL'];
         $api = mc4wp_get_api_v3();
 
