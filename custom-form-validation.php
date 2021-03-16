@@ -1,7 +1,7 @@
 <?php
 
 // validate form request (all forms)
-// this will validate that the field with name "BEST_VEGETABLE" is set has a value of "carrot"
+// this will validate that the field with name "BEST_VEGETABLE" is set and has a value of "carrot"
 add_filter( 'hf_validate_form', function( $error_code, $form, $data ) {
 	if( ! isset($data['BEST_VEGETABLE']) || $data['BEST_VEGETABLE'] !== 'carrot' ) {
 		$error_code = 'wrong_answer';
